@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-md-6 col-xs-12">
+    <md-card>
+      <md-card-title class="card-title">
+        <h2>Lobby</h2>
+      </md-card-title>
+      <md-card-content>
+        <form novalidate [formGroup]="playerInfoForm" (ngSubmit)="submitForm()">
+          <div class="row">
+            <div class="col-xs-6">
+              <md-input-container>
+                <input md-input id="name-input" placeholder="Name" formControlName="name">
+              </md-input-container>
+            </div>
+            <div class="col-xs-6">
+              <md-slide-toggle
+                  color="primary"
+                  [checked]="playerInfoForm.value.isReady"
+                  [disabled]="!playerInfoForm.valid"
+                  (change)="submitForm()" >
+                Ready?
+              </md-slide-toggle>
+            </div>
+          </div>
+
+        </form>
+      </md-card-content>
+    </md-card>
+  </div>
+  <div class="col-md-6 col-xs-12">
+    <md-card>
+      <md-card-title>
+        <h2>Players Detected</h2>
+      </md-card-title>
+
+      <md-card-content>
+        <div id="player-list-container">
+          <div class="row">
+            <div class="col-xs-7 col-md-7">
+              <label for="player-name">Name</label>
+            </div>
+            <!-- Party Leader Icon, if applicable -->
+            <div class="col-xs-2 col-md-2"></div>
+            <div class="col-xs-3 col-md-3">
+              <label for="ready-status">Ready?</label>
+            </div>
+          </div>
+          <div *ngFor="let player of players; let i = index">
+            <div class="col-md-12"></div>
+            <div class="col-xs-7 ">
+              <p> {{player.name}} </p>
+            </div>
+            <!-- Party Leader Icon, if applicable -->
+            <div class="col-xs-2 ">
+              <div *ngIf="player.isLeader">
+                <i id="party-leader" class="fa fa-star fa-fw"></i>
+              </div>
+            </div>
+            <div class="col-xs-3 ">
+              <div *ngIf="player.isReady" class="ready-indicator-container">
+                <i id="ready-status" class="fa fa-check fa-fw"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>
+

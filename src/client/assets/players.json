@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Jim Bob",
+    "isLeader": "true",
+    "isReady": "false"
+  },
+  {
+    "name": "Billy Jean",
+    "isLeader": "false",
+    "isReady":"false"
+  }
+]
