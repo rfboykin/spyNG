@@ -15,7 +15,7 @@ describe('Home', () => {
       .toEqual('Edsger Dijkstra\nDonald Knuth\nAlan Turing\nGrace Hopper');
   });
 
-  it('should add a name to the list using the form', () => {
+  it('should addNewPlayer a name to the list using the form', () => {
     element(by.css('sd-home form input')).sendKeys('Tim Berners-Lee');
     element(by.css('sd-home form button')).click();
 

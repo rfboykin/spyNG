@@ -9,12 +9,12 @@ import { LobbyComponent } from './lobby.component';
 import { LobbyRoutingModule } from './lobby-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
-import { PlayerListService } from './player-list/player-list.service';
+import { LobbyService } from './lobby-service/lobby.service';
 
 @NgModule({
   imports: [CommonModule, LobbyRoutingModule, ReactiveFormsModule, SharedModule, MaterialModule],
   declarations: [LobbyComponent],
-  providers: [PlayerListService],
+  providers: [LobbyService],
   exports: [LobbyComponent]
 })
 export class LobbyModule {

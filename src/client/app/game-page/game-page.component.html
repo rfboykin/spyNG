@@ -1,6 +1,30 @@
-<div *ngIf="!isSpy">
-<p>You are at:</p> <strong>The Beach!</strong>
-</div>
-<div *ngIf="isSpy">
-  <strong>You are the Spy!</strong>
-</div>
+<md-card *ngIf="!isSpy" class="location-card card-padding-bottom" >
+  <md-card-footer>
+    <h2>The Beach
+      <small class="role">Tourist</small>
+    </h2>
+  </md-card-footer>
+  <img md-card-image src="/src/client/assets/locations/beach.jpeg" class="location-image">
+</md-card>
+
+<md-card *ngIf="isSpy" class="spy-card card-padding-bottom">
+  <md-card-footer>
+    <h2>Spy</h2>
+    <!--<button md-button class="btn-location-list">See Location List</button>-->
+  </md-card-footer>
+  <img md-card-image src="/src/client/assets/locations/spy.jpeg" class="location-image">
+</md-card>
+
+<md-card>
+  <md-card-content>
+    <md-card-title>
+      Debug
+    </md-card-title>
+    <md-slide-toggle
+        color="primary"
+        [checked]="isSpy"
+        (change)="toggleSpy()">
+      Spy
+    </md-slide-toggle>
+  </md-card-content>
+</md-card>

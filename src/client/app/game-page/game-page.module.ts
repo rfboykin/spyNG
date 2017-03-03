@@ -5,9 +5,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GamePageComponent } from './game-page.component';
 import { GamePageRoutingModule } from './game-page-routing.module';
+import { MaterialModule } from '@angular/material';
 
 @NgModule({
-  imports: [CommonModule, GamePageRoutingModule],
+  imports: [CommonModule, GamePageRoutingModule, MaterialModule],
   declarations: [GamePageComponent],
   exports: [GamePageComponent]
 })

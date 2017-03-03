@@ -24,7 +24,7 @@ h2 {
   }
 
   & .ready-indicator-container {
-    text-align: center;
+    text-align: left;
     color: green;
   }
 }
@@ -55,3 +55,13 @@ input {
   padding: 24px 24px 8px 24px;
 
 }*/
+
+.party-leader ::after{
+  font-family: 'FontAwesome';
+  content:'   \f005';
+  font-size: .7em;
+  position: relative;
+  top: -4px;
+  left: 1px;
+
+}

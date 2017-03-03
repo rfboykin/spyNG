@@ -57,7 +57,8 @@ export class SeedConfig {
 
   /**
    * The current build type.
-   * The default build type is `dev`, which can be overriden by the `--build-type dev|prod` flag when running `npm start`.
+   * The default build type is `dev`, which can be overriden by the `--build-type dev|prod` flag when running `npm
+   * start`.
    */
   BUILD_TYPE = getBuildType();
 
@@ -83,9 +84,9 @@ export class SeedConfig {
   COVERAGE_PORT = argv['coverage-port'] || 4004;
 
   /**
-  * The path to the coverage output
-  * NB: this must match what is configured in ./karma.conf.js
-  */
+   * The path to the coverage output
+   * NB: this must match what is configured in ./karma.conf.js
+   */
   COVERAGE_DIR = 'coverage_js';
   COVERAGE_TS_DIR = 'coverage';
 
@@ -112,11 +113,11 @@ export class SeedConfig {
    * The default value is `0`, meaning typed compilation will always be performed.
    * @type {number}
    */
-  TYPED_COMPILE_INTERVAL = 0;
+  TYPED_COMPILE_INTERVAL = 4;
 
   /**
    * The directory where the bootstrap file is located.
-   * The default directory is `app`.
+   * The default directory is `server`.
    * @type {string}
    */
   BOOTSTRAP_DIR = argv['app'] || 'app';
@@ -343,7 +344,7 @@ export class SeedConfig {
    */
   get DEPENDENCIES(): InjectableDependency[] {
     return normalizeDependencies(this.NPM_DEPENDENCIES.filter(filterDependency.bind(null, this.BUILD_TYPE)))
-      .concat(this.APP_ASSETS.filter(filterDependency.bind(null, this.BUILD_TYPE)));
+        .concat(this.APP_ASSETS.filter(filterDependency.bind(null, this.BUILD_TYPE)));
   }
 
   /**
@@ -367,19 +368,19 @@ export class SeedConfig {
       '@angular/compiler/testing': 'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
       '@angular/core/testing': 'node_modules/@angular/core/bundles/core-testing.umd.js',
       '@angular/http/testing': 'node_modules/@angular/http/bundles/http-testing.umd.js',
-      '@angular/platform-browser/testing':
-        'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
-      '@angular/platform-browser-dynamic/testing':
-        'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+      '@angular/platform-browser/testing': 'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
+      '@angular/platform-browser-dynamic/testing': 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
       '@angular/material': 'node_modules/@angular/material/bundles/material.umd.js',
-      'app/*': '/app/*',
+
+      'socket.io-client': 'node_modules/socket.io-client/socket.io',
+      'immutable' : 'node_modules/immutable/dist/immutable',
+      'app/*': '/server/*',
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
       '*': 'node_modules/*'
     },
-    packages: {
-    }
+    packages: {}
   };
 
   /**
@@ -477,8 +478,7 @@ export class SeedConfig {
    * White list for CSS color guard
    * @type {[string, string][]}
    */
-  COLOR_GUARD_WHITE_LIST: [string, string][] = [
-  ];
+  COLOR_GUARD_WHITE_LIST: [string, string][] = [];
 
   /**
    * Configurations for NPM module configurations. Add to or override in project.config.ts.
@@ -507,6 +507,11 @@ export class SeedConfig {
           [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
           [`${this.APP_BASE}node_modules`]: 'node_modules',
           [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
+        },
+        ghostMode: false, // Turns off mirroring actions across devices
+        socket: {
+          namespace: '/browsersync',
+          domain:  '192.168.1.141:8080'
         }
       }
     },
@@ -636,8 +641,8 @@ export class SeedConfig {
  */
 export function normalizeDependencies(deps: InjectableDependency[]) {
   deps
-    .filter((d: InjectableDependency) => !/\*/.test(d.src)) // Skip globs
-    .forEach((d: InjectableDependency) => d.src = require.resolve(d.src));
+      .filter((d: InjectableDependency) => !/\*/.test(d.src)) // Skip globs
+      .forEach((d: InjectableDependency) => d.src = require.resolve(d.src));
   return deps;
 }
 

@@ -14,4 +14,7 @@ import { Component } from '@angular/core';
 export class GamePageComponent {
   private isSpy = false;
 
+  toggleSpy(){
+    this.isSpy = !this.isSpy;
+  }
 }

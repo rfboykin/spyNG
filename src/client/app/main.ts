@@ -8,7 +8,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 // Load i18n providers
 // import { TranslationProviders } from './i18n.providers';
 
-// The app module
+// The server module
 import { AppModule } from './app.module';
 
 if (String('<%= BUILD_TYPE %>') === 'prod') { enableProdMode(); }

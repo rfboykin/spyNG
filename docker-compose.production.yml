@@ -12,7 +12,7 @@ services:
     networks:
       - prod-network
     volumes:
-      - ./dist:/home/app/angular-seed/dist
+      - ./dist:/home/server/angular-seed/dist
 
   angular-seed-nginx:
     command: /bin/bash -c "envsubst '$$NGINX_HOST $$NGINX_PORT' < /etc/nginx/conf.d/angular-seed.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"

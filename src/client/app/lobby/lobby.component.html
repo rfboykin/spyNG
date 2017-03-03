@@ -15,9 +15,9 @@
             <div class="col-xs-6">
               <md-slide-toggle
                   color="primary"
-                  [checked]="playerInfoForm.value.isReady"
+                  formControlName="isReady"
                   [disabled]="!playerInfoForm.valid"
-                  (change)="submitForm()" >
+                  (change)="submitForm()">
                 Ready?
               </md-slide-toggle>
             </div>
@@ -40,28 +40,29 @@
               <label for="player-name">Name</label>
             </div>
             <!-- Party Leader Icon, if applicable -->
-            <div class="col-xs-2 col-md-2"></div>
-            <div class="col-xs-3 col-md-3">
+            <div class="col-xs-5">
               <label for="ready-status">Ready?</label>
             </div>
           </div>
-          <div *ngFor="let player of players; let i = index">
-            <div class="col-md-12"></div>
-            <div class="col-xs-7 ">
-              <p> {{player.name}} </p>
-            </div>
-            <!-- Party Leader Icon, if applicable -->
-            <div class="col-xs-2 ">
-              <div *ngIf="player.isLeader">
-                <i id="party-leader" class="fa fa-star fa-fw"></i>
+
+          <div *ngFor="let player of playersList">
+            <div *ngIf="player.isActive" class="row">
+              <!--<div class="col-md-12"></div>-->
+              <div class="col-xs-7 " [ngClass]="{'party-leader':player.isLeader}">
+                <p> {{player.name}} </p>
               </div>
-            </div>
-            <div class="col-xs-3 ">
-              <div *ngIf="player.isReady" class="ready-indicator-container">
-                <i id="ready-status" class="fa fa-check fa-fw"></i>
+
+              <div class="col-xs-5 ">
+                <div *ngIf="player.isReady" class="ready-indicator-container">
+                  <i id="ready-status" class="fa fa-check fa-fw"></i>
+                </div>
               </div>
             </div>
           </div>
+        </div>
+        <div *ngIf="currPlayer && currPlayer.isLeader">
+          <button type="button" class="btn btn-success m-t-5" ngClass="{'disabled':!allPlayersReady}"
+                  [disabled]="!allPlayersReady" (click)="launchGame()">Start</button>
         </div>
       </md-card-content>
     </md-card>

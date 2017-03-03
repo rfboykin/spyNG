@@ -1,3 +1,5 @@
+@import 'inc/variables';
+
 /* Reset */
 html,
 body,
@@ -47,7 +49,7 @@ input {
   padding: 8px;
 }
 
-md-input-container{
+md-input-container {
   width: 100%;
 }
 
@@ -62,8 +64,8 @@ button {
   padding: 8px 18px;
   text-decoration: none;
 
-  @media screen and (max-width:1024px){
-    .btn:focus{
+  @media screen and (max-width: 1024px) {
+    .btn:focus {
       outline: none;
     }
   }
@@ -73,20 +75,56 @@ button:hover {
   background-color: #28739e;
 }
 
-md-card{
+md-card {
   margin-bottom: 24px;
+  overflow: hidden;
 
-  & > md-card-title{
+  & > md-card-title {
     h2 {
       margin-top: 0px;
       margin-bottom: 0px;
     }
   }
 
-  & > md-card-content{
-    overflow-y: auto;
+  & > md-card-content {
+    overflow-y: hidden;
     overflow-x: hidden;
   }
 }
 
+.card-padding-bottom {
+  padding-bottom: $card-padding-bottom;
+}
 
+/**
+* Helper Classes
+**/
+
+@mixin add-margin($pos, $margin) {
+  .m-#{$pos}-#{$margin} {
+    @if ($pos == t) {
+      margin-top: #{$margin}px;
+    }
+    @if ($pos == b) {
+      margin-bottom: #{$margin}px;
+    }
+    @if ($pos == l) {
+      margin-left: #{$margin}px;
+    }
+    @if ($pos == r) {
+      margin-right: #{$margin}px;
+    }
+  }
+}
+
+@mixin margin-list {
+  $i: 1;
+  @while $i <= 5 {
+    @each $pos in t, b, l, r {
+      @include add-margin($pos, $i * 5);
+      $i: $i+ 1;
+    }
+  }
+}
+
+@include margin-list;

@@ -54,7 +54,7 @@ export function main() {
 
 @Component({
   selector: 'test-cmp',
-  template: '<sd-app></sd-app>'
+  template: '<sd-server></sd-server>'
 })
 
 class TestComponent {
